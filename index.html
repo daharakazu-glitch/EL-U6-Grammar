@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammar Infographic - Unit 6</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 全体的なフォントサイズを大きく、統一的に設定 */
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 26px; /* ベースフォントサイズを大きく設定 */
+        }
+        /* 見出しのサイズを相対的に調整 */
+        h1 { font-size: 2.5em; }
+        h2 { font-size: 2em; }
+        h3 { font-size: 1.7em; }
+        h4 { font-size: 1.5em; }
+        
+        /* 段落、ボタンなど主要なテキスト要素のサイズを統一 */
+        p, div, span, button {
+            font-size: 1em;
+        }
+
+        /* 英文フォントのスタイル（サイズは継承） */
+        .font-times {
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .infographic-card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .infographic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .audio-btn-small {
+            padding: 0.5rem 1rem;
+        }
+        .pdf-btn {
+            font-size: 0.8em;
+            padding: 0.5em 1em;
+        }
+        .jp-explanation {
+            font-size: 0.9em;
+            color: #4b5563; /* gray-600 */
+            margin-top: 0.75rem;
+        }
+        .recording {
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        /* Animation Styles */
+        .transformation-container .original-sentence > span {
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            display: inline-block;
+        }
+        .fade-out {
+            opacity: 0;
+            transform: translateY(-15px);
+        }
+        .transformation-container .verb-transform .original-verb {
+            display: none;
+        }
+        .verb-transform .participle {
+            display: inline-block !important; /* to override display: none */
+            color: #dc2626; /* red-600 */
+            font-weight: bold;
+            transform: scale(1.1);
+        }
+        .participle {
+            display: none;
+            transition: transform 0.3s ease;
+        }
+        .explanation-step {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background-color: #f3f4f6; /* gray-100 */
+        }
+        .visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-blue-700 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-10">
+            <h1 class="font-bold text-white">English Grammar Hub</h1>
+            <p class="text-blue-200 mt-2">Unit 6: 分詞構文をマスターしよう</p>
+        </header>
+
+        <!-- ページコンテンツ -->
+        <main>
+            <div id="page-infographic">
+                 <div class="text-right mb-4">
+                    <button onclick="downloadPdf('infographic-content', 'Unit6_Participle_Clauses.pdf')" class="pdf-btn bg-white hover:bg-gray-100 text-blue-700 font-bold rounded-lg shadow-md transition duration-300">
+                        <i class="fas fa-file-pdf mr-2"></i>PDFでダウンロード
+                    </button>
+                </div>
+                <div id="infographic-content">
+                    <div class="grid grid-cols-1 gap-10 max-w-5xl mx-auto">
+                        
+                        <!-- 分詞構文とは？ -->
+                        <div class="infographic-card printable-section">
+                            <h2 class="font-bold text-indigo-600 mb-4">分詞構文とは？</h2>
+                            <p class="mb-4">接続詞でつながれた文を、<strong class="text-red-500 font-bold">分詞 (現在分詞 -ing / 過去分詞 -ed)</strong> を使ってシンプルに表現する方法です。文を簡潔にし、より洗練された印象を与えます。</p>
+                            
+                            <div class="bg-teal-50 p-5 rounded-lg mb-6">
+                                <h3 class="font-semibold mb-2 text-teal-800">分詞構文が持つ意味</h3>
+                                <p class="mb-3">分詞構文は、文脈に応じてさまざまな接続詞の代わりをします。どの意味になるかは、文全体の流れから判断します。</p>
+                                <ul class="flex flex-wrap gap-3">
+                                    <li class="bg-teal-200 text-teal-800 px-4 py-2 rounded-full font-medium">時 (when / 〜するとき)</li>
+                                    <li class="bg-teal-200 text-teal-800 px-4 py-2 rounded-full font-medium">理由 (because, as, since / 〜なので)</li>
+                                    <li class="bg-teal-200 text-teal-800 px-4 py-2 rounded-full font-medium">付帯状況 (and / 〜して、そして〜)</li>
+                                    <li class="bg-teal-200 text-teal-800 px-4 py-2 rounded-full font-medium">条件 (if / もし〜ならば)</li>
+                                    <li class="bg-teal-200 text-teal-800 px-4 py-2 rounded-full font-medium">譲歩 (though / 〜だけれども)</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-indigo-50 p-5 rounded-lg">
+                                <h3 class="font-semibold mb-2">基本の作り方</h3>
+                                <p class="text-center font-mono text-indigo-800 mb-2">
+                                    <span class="text-gray-400">接続詞</span> + S + V ... → <strong class="text-red-500">Ving</strong> ...
+                                </p>
+                                <ol class="list-decimal list-inside space-y-2">
+                                    <li><strong class="text-blue-600">接続詞</strong>（when, as, becauseなど）を省略する。</li>
+                                    <li>主節と<strong class="text-blue-600">同じ主語</strong>を省略する。</li>
+                                    <li><strong class="text-blue-600">動詞</strong>を現在分詞（-ing形）に変える。</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <!-- 例文カード -->
+                        <div id="ex1" class="infographic-card printable-section">
+                            <h3 class="font-semibold mb-4">例文 ①：連続する動作</h3>
+                            <div class="p-4 bg-sky-50 rounded-md mb-6">
+                                <div class="flex justify-between items-center">
+                                    <p class="font-times">At high school he enjoyed studying history and became interested in gardening and sports, <strong class="text-blue-600">becoming</strong> a good long-distance runner.</p>
+                                    <div class="flex space-x-2">
+                                        <button onclick="speakText(this.parentElement.previousElementSibling.textContent)" class="audio-btn-small bg-green-500 hover:bg-green-600 text-white font-bold rounded-md transition duration-300"><i class="fas fa-volume-up"></i></button>
+                                        <button onclick="startRecording(this, this.parentElement.previousElementSibling.textContent)" class="audio-btn-small bg-red-500 hover:bg-red-600 text-white font-bold rounded-md transition duration-300"><i class="fas fa-microphone"></i></button>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-2 text-sm result-display"></div>
+                                <p class="jp-explanation">（高校時代、彼は歴史の勉強を楽しみ、園芸とスポーツに興味を持ち、優秀な長距離ランナーになりました。）</p>
+                            </div>
+                            <div class="transformation-container" data-current-step="0">
+                                <h4 class="font-bold mb-2">成り立ちを見てみよう</h4>
+                                <p class="original-sentence font-times bg-gray-100 p-3 rounded-md">...sports, <span class="conjunction">and</span> <span class="subject">he</span> <span class="verb"><span class="original-verb">became</span><span class="participle">becoming</span></span> a good...</p>
+                                <div class="mt-4">
+                                    <button onclick="stepAnimation('ex1')" class="step-btn bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-md">アニメーション</button>
+                                    <button onclick="resetAnimation('ex1')" class="reset-btn bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md" style="display: none;">リセット</button>
+                                </div>
+                                <div id="explanation-ex1" class="mt-4 space-y-2">
+                                    <p class="explanation-step">1. 接続詞 <strong class="text-blue-600">'and'</strong> を省略します。</p>
+                                    <p class="explanation-step">2. 主語 <strong class="text-blue-600">'he'</strong> を省略します。</p>
+                                    <p class="explanation-step">3. 動詞 <strong class="text-blue-600">'became'</strong> を <strong class="text-red-500">'becoming'</strong> に変えます。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="ex2" class="infographic-card printable-section">
+                            <h3 class="font-semibold mb-4">例文 ②：理由・原因 (Beingの省略)</h3>
+                            <div class="p-4 bg-purple-50 rounded-md mb-6">
+                                <div class="flex justify-between items-center">
+                                    <p class="font-times"><strong class="text-blue-600">(Being)</strong> The only black African student in his class, Nelson Mandela suffered a lot of racism from the other students.</p>
+                                    <div class="flex space-x-2">
+                                        <button onclick="speakText(this.parentElement.previousElementSibling.textContent)" class="audio-btn-small bg-green-500 hover:bg-green-600 text-white font-bold rounded-md transition duration-300"><i class="fas fa-volume-up"></i></button>
+                                        <button onclick="startRecording(this, this.parentElement.previousElementSibling.textContent)" class="audio-btn-small bg-red-500 hover:bg-red-600 text-white font-bold rounded-md transition duration-300"><i class="fas fa-microphone"></i></button>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-2 text-sm result-display"></div>
+                                <p class="jp-explanation">（クラスで唯一の黒人アフリカ系学生だったので、ネルソン・マンデラは他の生徒から多くの人種差別に苦しみました。）</p>
+                            </div>
+                            <div class="transformation-container" data-current-step="0">
+                                <h4 class="font-bold mb-2">成り立ちを見てみよう</h4>
+                                <p class="original-sentence font-times bg-gray-100 p-3 rounded-md"><span class="conjunction">As</span> <span class="subject">he</span> <span class="verb"><span class="original-verb">was</span><span class="participle">(Being)</span></span> The only black...</p>
+                                <div class="mt-4">
+                                    <button onclick="stepAnimation('ex2')" class="step-btn bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-md">アニメーション</button>
+                                    <button onclick="resetAnimation('ex2')" class="reset-btn bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md" style="display: none;">リセット</button>
+                                </div>
+                                 <div id="explanation-ex2" class="mt-4 space-y-2">
+                                    <p class="explanation-step">1. 接続詞 <strong class="text-blue-600">'As'</strong> を省略します。</p>
+                                    <p class="explanation-step">2. 主語 <strong class="text-blue-600">'he'</strong> を省略します。</p>
+                                    <p class="explanation-step">3. 動詞 <strong class="text-blue-600">'was'</strong> を <strong class="text-red-500">'Being'</strong> に。 ※Beingはよく省略されます。</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="ex3" class="infographic-card printable-section">
+                            <h3 class="font-semibold mb-4">例文 ③：時・理由</h3>
+                            <div class="p-4 bg-green-50 rounded-md mb-6">
+                                <div class="flex justify-between items-center">
+                                    <p class="font-times"><strong class="text-blue-600">Becoming</strong> more famous, Nelson was elected to be a regional president of the ANC.</p>
+                                    <div class="flex space-x-2">
+                                        <button onclick="speakText(this.parentElement.previousElementSibling.textContent)" class="audio-btn-small bg-green-500 hover:bg-green-600 text-white font-bold rounded-md transition duration-300"><i class="fas fa-volume-up"></i></button>
+                                        <button onclick="startRecording(this, this.parentElement.previousElementSibling.textContent)" class="audio-btn-small bg-red-500 hover:bg-red-600 text-white font-bold rounded-md transition duration-300"><i class="fas fa-microphone"></i></button>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-2 text-sm result-display"></div>
+                                <p class="jp-explanation">（より有名になり、ネルソンはANCの地域議長に選出されました。）</p>
+                            </div>
+                           <div class="transformation-container" data-current-step="0">
+                                <h4 class="font-bold mb-2">成り立ちを見てみよう</h4>
+                                <p class="original-sentence font-times bg-gray-100 p-3 rounded-md"><span class="conjunction">As</span> <span class="subject">he</span> <span class="verb"><span class="original-verb">became</span><span class="participle">Becoming</span></span> more famous...</p>
+                                <div class="mt-4">
+                                    <button onclick="stepAnimation('ex3')" class="step-btn bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-md">アニメーション</button>
+                                    <button onclick="resetAnimation('ex3')" class="reset-btn bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md" style="display: none;">リセット</button>
+                                </div>
+                                 <div id="explanation-ex3" class="mt-4 space-y-2">
+                                    <p class="explanation-step">1. 接続詞 <strong class="text-blue-600">'As'</strong> を省略します。</p>
+                                    <p class="explanation-step">2. 主語 <strong class="text-blue-600">'he'</strong> を省略します。</p>
+                                    <p class="explanation-step">3. 動詞 <strong class="text-blue-600">'became'</strong> を <strong class="text-red-500">'Becoming'</strong> に変えます。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="ex4" class="infographic-card printable-section">
+                            <h3 class="font-semibold mb-4">例文 ④：付帯状況</h3>
+                            <div class="p-4 bg-orange-50 rounded-md mb-6">
+                                <div class="flex justify-between items-center">
+                                    <p class="font-times">In 1956, he was arrested again and held in Johannesburg Prison, <strong class="text-blue-600">going</strong> to trial in 1958.</p>
+                                    <div class="flex space-x-2">
+                                        <button onclick="speakText(this.parentElement.previousElementSibling.textContent)" class="audio-btn-small bg-green-500 hover:bg-green-600 text-white font-bold rounded-md transition duration-300"><i class="fas fa-volume-up"></i></button>
+                                        <button onclick="startRecording(this, this.parentElement.previousElementSibling.textContent)" class="audio-btn-small bg-red-500 hover:bg-red-600 text-white font-bold rounded-md transition duration-300"><i class="fas fa-microphone"></i></button>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-2 text-sm result-display"></div>
+                                <p class="jp-explanation">（1956年、彼は再び逮捕されヨハネスブルグ刑務所に収監され、1958年に裁判にかけられました。）</p>
+                            </div>
+                            <div class="transformation-container" data-current-step="0">
+                                <h4 class="font-bold mb-2">成り立ちを見てみよう</h4>
+                                <p class="original-sentence font-times bg-gray-100 p-3 rounded-md">...Prison, <span class="conjunction">and</span> <span class="subject">he</span> <span class="verb"><span class="original-verb">went</span><span class="participle">going</span></span> to trial...</p>
+                                <div class="mt-4">
+                                    <button onclick="stepAnimation('ex4')" class="step-btn bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-md">アニメーション</button>
+                                    <button onclick="resetAnimation('ex4')" class="reset-btn bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md" style="display: none;">リセット</button>
+                                </div>
+                                <div id="explanation-ex4" class="mt-4 space-y-2">
+                                    <p class="explanation-step">1. 接続詞 <strong class="text-blue-600">'and'</strong> を省略します。</p>
+                                    <p class="explanation-step">2. 主語 <strong class="text-blue-600">'he'</strong> を省略します。</p>
+                                    <p class="explanation-step">3. 動詞 <strong class="text-blue-600">'went'</strong> を <strong class="text-red-500">'going'</strong> に変えます。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const { jsPDF } = window.jspdf;
+        let recognition;
+        let currentRecordButton = null;
+
+        // Speech Recognition setup
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onresult = (event) => {
+                const speechResult = event.results[0][0].transcript;
+                if (currentRecordButton) {
+                    const targetText = currentRecordButton.dataset.targetText;
+                    const resultEl = currentRecordButton.closest('.p-4').querySelector('.result-display');
+                    evaluateSpeech(speechResult, targetText, resultEl);
+                }
+            };
+
+            recognition.onspeechend = () => {
+                recognition.stop();
+            };
+
+            recognition.onend = () => {
+                if(currentRecordButton) {
+                    currentRecordButton.classList.remove('recording');
+                    const icon = currentRecordButton.querySelector('i');
+                    if (icon) icon.className = 'fas fa-microphone';
+                    currentRecordButton = null;
+                }
+            };
+
+            recognition.onerror = (event) => {
+                if (currentRecordButton) {
+                    const resultEl = currentRecordButton.closest('.p-4').querySelector('.result-display');
+                    resultEl.innerHTML = `<span class="text-red-500">エラー: ${event.error}</span>`;
+                    currentRecordButton.classList.remove('recording');
+                     const icon = currentRecordButton.querySelector('i');
+                    if (icon) icon.className = 'fas fa-microphone';
+                    currentRecordButton = null;
+                }
+            };
+        }
+
+        function startRecording(button, targetText) {
+            if (!recognition) {
+                alert('お使いのブラウザは音声認識に対応していません。');
+                return;
+            }
+            if (currentRecordButton && currentRecordButton !== button) {
+                recognition.stop();
+            }
+            
+            currentRecordButton = button;
+            button.dataset.targetText = targetText;
+            const resultEl = button.closest('.p-4').querySelector('.result-display');
+            
+            button.classList.add('recording');
+            const icon = button.querySelector('i');
+            if(icon) icon.className = 'fas fa-stop';
+
+            resultEl.innerHTML = '<span class="text-gray-500">話してください...</span>';
+
+            recognition.start();
+        }
+
+        function evaluateSpeech(speech, target, resultEl) {
+            const cleanTarget = target.replace(/[.,?"'()]/g, "").toLowerCase();
+            const cleanSpeech = speech.replace(/[.,?"'()]/g, "").toLowerCase();
+
+            const targetWords = cleanTarget.split(' ').filter(w => w);
+            const speechWords = cleanSpeech.split(' ').filter(w => w);
+            
+            let correctWords = 0;
+            const uniqueTargetWords = [...new Set(targetWords)];
+            speechWords.forEach(word => {
+                if (uniqueTargetWords.includes(word)) {
+                    correctWords++;
+                }
+            });
+
+            const rawScore = (correctWords / uniqueTargetWords.length) * 100;
+            
+            let finalScore = 0;
+            let feedback = '';
+
+            if (rawScore >= 80) {
+                finalScore = 100;
+                feedback = '<span class="text-green-500 font-bold">素晴らしい！ ' + finalScore + '点です！</span>';
+            } else if (rawScore >= 60) {
+                finalScore = 90 + Math.floor(Math.random() * 5); // 90-94
+                feedback = '<span class="text-yellow-500 font-bold">ほぼ完璧です！ ' + finalScore + '点！</span>';
+            } else if (rawScore >= 40) {
+                finalScore = 80 + Math.floor(Math.random() * 10); // 80-89
+                feedback = '<span class="text-blue-500 font-bold">良いですね！ ' + finalScore + '点！</span>';
+            } else {
+                finalScore = 70 + Math.floor(Math.random() * 10); // 70-79
+                feedback = '<span class="text-orange-500 font-bold">もう一度挑戦してみましょう！ ' + finalScore + '点</span>';
+            }
+            resultEl.innerHTML = `認識されたテキスト: "${speech}"<br>${feedback}`;
+        }
+        
+        // Animation Functions
+        function stepAnimation(exampleId) {
+            const container = document.getElementById(exampleId);
+            if (!container) return;
+
+            const transformationContainer = container.querySelector('.transformation-container');
+            let currentStep = parseInt(transformationContainer.dataset.currentStep, 10);
+            currentStep++;
+            transformationContainer.dataset.currentStep = currentStep;
+
+            const conjunction = container.querySelector('.conjunction');
+            const subject = container.querySelector('.subject');
+            const verb = container.querySelector('.verb');
+            const resetButton = container.querySelector('.reset-btn');
+            const stepButton = container.querySelector('.step-btn');
+            const explanationSteps = container.querySelectorAll(`#explanation-${exampleId} .explanation-step`);
+
+            if(resetButton) resetButton.style.display = 'inline-block';
+
+            switch (currentStep) {
+                case 1:
+                    if (conjunction) conjunction.classList.add('fade-out');
+                    if (explanationSteps.length > 0) explanationSteps[0].classList.add('visible');
+                    break;
+                case 2:
+                    if (subject) subject.classList.add('fade-out');
+                    if (explanationSteps.length > 1) explanationSteps[1].classList.add('visible');
+                    break;
+                case 3:
+                    if (verb) verb.classList.add('verb-transform');
+                    if (explanationSteps.length > 2) explanationSteps[2].classList.add('visible');
+                    if (stepButton) stepButton.style.display = 'none'; // Hide after last step
+                    break;
+            }
+        }
+
+        function resetAnimation(exampleId) {
+            const container = document.getElementById(exampleId);
+            if (!container) return;
+            
+            const transformationContainer = container.querySelector('.transformation-container');
+            transformationContainer.dataset.currentStep = 0;
+
+            const conjunction = container.querySelector('.conjunction');
+            const subject = container.querySelector('.subject');
+            const verb = container.querySelector('.verb');
+            const resetButton = container.querySelector('.reset-btn');
+            const stepButton = container.querySelector('.step-btn');
+            const explanationSteps = container.querySelectorAll(`#explanation-${exampleId} .explanation-step`);
+
+            if (conjunction) conjunction.classList.remove('fade-out');
+            if (subject) subject.classList.remove('fade-out');
+            if (verb) verb.classList.remove('verb-transform');
+            explanationSteps.forEach(step => step.classList.remove('visible'));
+            
+            if(resetButton) resetButton.style.display = 'none';
+            if(stepButton) stepButton.style.display = 'inline-block';
+        }
+
+        // テキスト読み上げ機能
+        function speakText(text) {
+            const cleanText = text.replace(/"/g, ''); // 発音のために引用符を削除
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            utterance.lang = 'en-US';
+            speechSynthesis.speak(utterance);
+        }
+
+        // PDFダウンロード機能
+        async function createPdfFromElement(elementId, fileName, pdfFontSize) {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = pdf.internal.pageSize.getHeight();
+            const margin = 10;
+            let y = margin;
+
+            const originalElement = document.getElementById(elementId);
+            const clone = originalElement.cloneNode(true);
+            clone.id = `${elementId}-print-clone`;
+            clone.style.position = 'absolute';
+            clone.style.left = '-9999px';
+            clone.style.width = originalElement.offsetWidth + 'px';
+            document.body.appendChild(clone);
+
+            // Hide non-printable elements in clone
+            clone.querySelectorAll('button, .result-display, .transformation-container').forEach(el => el.style.display = 'none');
+
+
+            if (pdfFontSize) {
+                clone.style.fontSize = pdfFontSize;
+                clone.querySelectorAll('*').forEach(el => {
+                    el.style.fontSize = 'inherit';
+                });
+            }
+
+            const sections = Array.from(clone.querySelectorAll('.printable-section'));
+
+            for (const section of sections) {
+                const canvas = await html2canvas(section, { scale: 2 });
+                const imgData = canvas.toDataURL('image/png');
+                const imgProps = pdf.getImageProperties(imgData);
+                const imgHeight = (imgProps.height * (pdfWidth - margin * 2)) / imgProps.width;
+
+                if (y + imgHeight > pdfHeight - margin) {
+                    pdf.addPage();
+                    y = margin;
+                }
+
+                pdf.addImage(imgData, 'PNG', margin, y, pdfWidth - margin * 2, imgHeight);
+                y += imgHeight + 5; // セクション間のスペース
+            }
+
+            document.body.removeChild(clone);
+            pdf.save(fileName);
+        }
+
+        async function downloadPdf(elementId, fileName) {
+            await createPdfFromElement(elementId, fileName, '16px');
+        }
+    </script>
+</body>
+</html>
